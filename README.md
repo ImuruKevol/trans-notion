@@ -8,4 +8,6 @@ nextJS + scss + recoil + swr
 
 ## process.env
 
+create file `.env.production`, `.env.development`
+
 - URL

@@ -4,17 +4,7 @@ import style from "styles/Toolbox";
 import useSWR from "swr";
 
 const Toolbox = () => {
-  const { data, error } = useSWR("api/error");
   const [text, setText] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(() => {
-    if (error) {
-      // alert("error!");
-      console.error(error);
-      setErrorMsg(errorMsg + error);
-    }
-  }, [error]);
 
   return (
     <div className="toolbox">

@@ -1,21 +1,27 @@
 import { useState } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
+import { useRecoilState } from "recoil";
+import { loginState } from "store";
 
 const Login = () => {
-  const router = useRouter();
+  const [login, setLogin] = useRecoilState(loginState)
   const [user, setUser] = useState({
     id: "test",
     pw: "1234",
   });
 
-  const login = async () => {
-    const res = await fetch("api/login", {method: "POST", body: JSON.stringify(user)});
-    const { login } = await res.json();
-    if(!login) {
-      alert("login fail!");
-      return;
-    }
-    router.push(`post/${user.id}`)
+  const onLogin = async () => {
+    // const res = await fetch("api/login", { method: "POST", body: JSON.stringify(user) });
+    // const { login } = await res.json();
+    // if (!login) {
+    //   alert("login fail!");
+    //   return;
+    // }
+    // router.push(`post/${user.id}`)
+    setLogin({
+      ...login,
+      value: true,
+    })
   }
 
   return (
@@ -30,7 +36,10 @@ const Login = () => {
         value={user.pw}
         onChange={(e) => setUser({ ...user, pw: e.target.value })}
       />
-      <input type="submit" value="login" onClick={login} />
+      <input type="submit" value="login" onClick={onLogin} />
+      <Link href="/post/1234">
+        <a>go to post "1234"</a>
+      </Link>
     </div>
   );
 };
